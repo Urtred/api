@@ -47,26 +47,29 @@ class SortController extends Controller
 
     public function actionGetSortBooks()
     {
-        $sort = [];
-        // Monta array de ordenação
-        foreach ($_GET as $key => $value) {
-            // Se valor da ordenação for nulo retorna erro!
-            switch (strtolower($value)) {
-                case 'asc': $sort[$key] = SORT_ASC; break;
-                case 'desc': $sort[$key] = SORT_DESC; break;
-                default: return json_encode(['error'=>'Valor de ordenação inválido']); break;
+        if(!empty($_GET)){
+            $sort = [];
+            // Monta array de ordenação
+            foreach ($_GET as $key => $value) {
+                // Se valor da ordenação for nulo retorna erro!
+                switch (strtolower($value)) {
+                    case 'asc': $sort[$key] = SORT_ASC; break;
+                    case 'desc': $sort[$key] = SORT_DESC; break;
+                    default: return json_encode(['error'=>'Valor de ordenação inválido']); break;
+                }
             }
-        }
-        
-        $model = Book::find()->orderBy($sort)->all();
+            
+            $model = Book::find()->orderBy($sort)->all();
 
-        // transforma de objeto private para array
-        $books = [];
-        foreach ($model as $key => $value) {
-            $books[] = $value->getAttributes();
-        }
+            // transforma de objeto private para array
+            $books = [];
+            foreach ($model as $key => $value) {
+                $books[] = $value->getAttributes();
+            }
 
-        return json_encode(['data'=>$books]);
+            return json_encode(['data'=>$books]);
+        }
+        return json_encode(['data'=>'']);
     }
 
     public function getBooks()
@@ -92,13 +95,16 @@ class SortController extends Controller
 
     public function actionGetBooks()
     {
-        $model = $this->getBooks();
-        // transforma de objeto private para array
-        $books = [];
-        foreach ($model as $key => $value) {
-            $books[] = $value->getAttributes();
-        }
+        if(!empty($_GET)){
+            $model = $this->getBooks();
+            // transforma de objeto private para array
+            $books = [];
+            foreach ($model as $key => $value) {
+                $books[] = $value->getAttributes();
+            }
 
-        return json_encode(['data'=>$books]);
+            return json_encode(['data'=>$books]);
+        }
+        return json_encode(['data'=>'']);
     }
 }
