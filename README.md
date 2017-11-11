@@ -16,7 +16,7 @@ INSERT INTO `sort`.`book` (`id`, `title`, `author`, `edition_year`) VALUES ('4',
 4. Clonar o repositorio da API.
 5. Instalar composer caso precise.
 6. Rodar composer.phar para fazer download dos itens obrigatórios ao projeto.
-7. Para iniciar o servidor PHP da API acessar no terminal cd caminho_até_a-pasta_do_projeto/web rodar o camando abaixo no seu terminal:
+7. Para iniciar o servidor PHP da API acessar no terminal cd caminho_até_a-pasta_do_projeto/web rodar o comando abaixo no seu terminal:
 php -S localhost:8000
 8. Servidor rodando e pronto para receber requisições.
 9. Para requisições via POSTMAN utilizar a url: http://localhost:8000/sort/sort/admin
