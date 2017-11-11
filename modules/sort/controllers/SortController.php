@@ -18,7 +18,7 @@ class SortController extends Controller
         return [
             'access' => [
                 'class' => \yii\filters\AccessControl::className(),
-                'only' => ['admin'],
+                'only' => ['getSortBooks', 'getBooks', 'getBooks'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -45,7 +45,7 @@ class SortController extends Controller
         ];
     }
 
-    public function actionAdmin()
+    public function actionGetSortBooks()
     {
         $sort = [];
         // Monta array de ordenação
@@ -69,4 +69,36 @@ class SortController extends Controller
         return json_encode(['data'=>$books]);
     }
 
+    public function getBooks()
+    {
+        $sql = 'SELECT * FROM book';
+        $sort = [];
+        // Monta array de ordenação
+        foreach ($_GET as $key => $value) {
+            // Se valor da ordenação for nulo retorna erro!
+            switch (strtolower($value)) {
+                case 'asc': $sort[] = ' '.$key.' '.$value; break;
+                case 'desc': $sort[] = ' '.$key.' '.$value; break;
+                default: return json_encode(['error'=>'Valor de ordenação inválido']); break;
+            }
+        }
+        if($sort){
+            $sort = implode(', ', $sort);
+            $sql .= ' ORDER BY'.$sort;
+        }
+
+        return Book::findBySql($sql)->all();
+    }
+
+    public function actionGetBooks()
+    {
+        $model = $this->getBooks();
+        // transforma de objeto private para array
+        $books = [];
+        foreach ($model as $key => $value) {
+            $books[] = $value->getAttributes();
+        }
+
+        return json_encode(['data'=>$books]);
+    }
 }

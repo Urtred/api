@@ -19,5 +19,6 @@ INSERT INTO `sort`.`book` (`id`, `title`, `author`, `edition_year`) VALUES ('4',
 7. Para iniciar o servidor PHP da API acessar no terminal cd caminho_até_a-pasta_do_projeto/web rodar o comando abaixo no seu terminal:
 php -S localhost:8000
 8. Servidor rodando e pronto para receber requisições.
-9. Para requisições via POSTMAN utilizar a url: http://localhost:8000/sort/sort/admin
-10. Para testar a Ordenação basta concatenar na url a "coluna=ordem", exemplo http://localhost:8000/sort/sort/admin?title=DESC caso queira enviar mais de uma coluna para ordenação, basta incluir exemplo: http://localhost:8000/sort/sort/admin?title=DESC?author=ASC
+9. Para requisições via POSTMAN utilizar a url: http://localhost:8000/sort/sort/get-sort-books
+10. Para testar a Ordenação basta concatenar na url a "coluna=ordem", exemplo http://localhost:8000/sort/sort/get-sort-books?title=DESC caso queira enviar mais de uma coluna para ordenação, basta incluir exemplo: http://localhost:8000/sort/sort/get-sort-books?title=DESC?author=ASC
+11. Ou pode testar utilizando a url http://localhost:8000/sort/sort/get-books que faz o mesmo mas a função é diferente.
